@@ -1,0 +1,18 @@
+version: "3.8"
+services:
+  app:
+    image: loja/shopping/shopping
+    container_name: app
+    depends_on:
+      - db
+    environment:
+      POSTGRES_URL: jdbc:postgresql://db:5432/postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: breaking
+  db:
+    image: postgres:latest
+    container_name: db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: breaking
+      POSTGRES_DB: postgres

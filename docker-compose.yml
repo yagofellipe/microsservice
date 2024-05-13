@@ -1,0 +1,41 @@
+version: "3.5"
+
+services:
+  postgres:
+    image: postgres:latest
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_DB: postgres
+      POSTGRES_PASSWORD: breaking
+  user:
+      image: loja/user/user
+      ports:
+        - "8089:8089"
+      environment:
+        POSTGRES_URL: jdbc:postgresql://postgres:5432/postgres
+        POSTGRES_USER: postgres
+        POSTGRES_PASSWORD: breaking
+      depends_on:
+        - postgres
+  product:
+    image: loja/product/product
+    ports:
+      - "8081:8081"
+    environment:
+      POSTGRES_URL: jdbc:postgresql://postgres:5432/postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: breaking
+    depends_on:
+      - postgres
+  shopping:
+    image: loja/shopping/shopping
+    ports:
+      - "8082:8082"
+    environment:
+      POSTGRES_URL: jdbc:postgresql://postgres:5432/postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: breaking
+    depends_on:
+      - postgres

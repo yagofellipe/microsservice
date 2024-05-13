@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: shopping-configmap
+data:
+  product_url: "http://product:8081/"
+  user_url: "http://user:8089/"
